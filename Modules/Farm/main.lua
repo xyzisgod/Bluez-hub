@@ -20,7 +20,7 @@ end
 
 function Farm.new()
     Farm.enabled = false
-    local thread = task.spawn(function)
+    local thread = task.spawn(function() 
         while true do
             task.wait(0.1)
             
