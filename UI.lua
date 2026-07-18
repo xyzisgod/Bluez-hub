@@ -35,7 +35,7 @@ UI.Window = Starlight:CreateWindow({
 })
 
 -- Sections / Tabs
-UI.FarmSection = Window:CreateTabSection("Farm", true)
+UI.FarmSection = UI.Window:CreateTabSection("Farm", true)
 
 UI.FarmTab = UI.FarmSection:CreateTab({
     Name = "Farm",
