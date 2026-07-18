@@ -29,6 +29,8 @@ function Farm.new()
             end
         end
     end)
+    
+    return thread
 end
 
 return Farm

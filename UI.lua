@@ -9,8 +9,14 @@ local ProjectUrl = "https://raw.githubusercontent.com/xyzisgod/Bluez-hub/refs/he
 
 local Commons = loadstring(game:HttpGet(ProjectUrl .. "commons.lua"))()
 
+local FarmModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Farm/main.lua")))()
+
+local StatsModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Stats/main.lua")))()
+
 -- Global Settings
 getgenv().InterfaceName = "Bluez"
+local FarmThread = FarmModule.new()
+local StatsThread = StatsModule.new()
 
 -- Window
 UI.Window = Starlight:CreateWindow({
@@ -54,31 +60,43 @@ UI.StartNotification = Starlight:Notification({
     Content = "Bluez started",
 }, "StartNotification")
 
+-- Toggles
+UI.FarmToggle = FarmGB:CreateToggle({
+    Name = "Auto Farm",
+    CurrentValue = false,
+    Style = 2,
+    Callback = function(enabled)
+		FarmModule.enabled = enabled
+    end,
+}, "FarmToggle")
+
 UI.StatsToggle = StatsGB:CreateToggle({
     Name = "Auto Stats",
     CurrentValue = false,
     Style = 2,
     Callback = function(enabled)
-        stats_enabled = enabled
+        StatsModule.enabled = enabled
     end,
 }, "StatsToggle")
 
+-- Sliders
 UI.StatSlider = StatsGB:CreateSlider({
     Name = "Stats To Add",
     Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
     Range = {0,100},
     Increment = 1,
     Callback = function(Value)
-		 value_stat = Value
+		 StatsModule.value = Value
     end,
 }, "StatSlider")
 
+-- More Toggles
 UI.MeleeStatsToggle = StatsGB:CreateToggle({
     Name = "Melee",
     CurrentValue = false,
     Style = 2,
     Callback = function(enabled)
-		stats_add["Melee"] = enabled
+		StatsModule.add["Melee"] = enabled
     end,
 }, "MeleeStatsToggle")
 
@@ -87,7 +105,7 @@ UI.DefenseStatsToggle = StatsGB:CreateToggle({
     CurrentValue = false,
     Style = 2,
     Callback = function(enabled)
-		stats_add["Defense"] = enabled
+		StatsModule.add["Defense"] = enabled
     end,
 }, "DefenseStatsToggle")
 
@@ -96,7 +114,7 @@ UI.SwordStatsToggle = StatsGB:CreateToggle({
     CurrentValue = false,
     Style = 2,
     Callback = function(enabled)
-		stats_add["Sword"] = enabled
+		StatsModule.add["Sword"] = enabled
     end,
 }, "SwordStatsToggle")
 
@@ -105,7 +123,7 @@ UI.PowerStatsToggle = StatsGB:CreateToggle({
     CurrentValue = false,
     Style = 2,
     Callback = function(enabled)
-		stats_add["Power"] = enabled
+		StatsModule.add["Power"] = enabled
     end,
 }, "PowerStatsToggle")
 
