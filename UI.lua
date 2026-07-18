@@ -44,12 +44,12 @@ UI.FarmTab = UI.FarmSection:CreateTab({
 }, "FarmTab")
 
 -- Groupboxes
-UI.FarmGB = FarmTab:CreateGroupbox({
+UI.FarmGB = UI.FarmTab:CreateGroupbox({
     Name = "Farm",
     Column = 1,
 }, "FarmGroupBox")
 
-UI.StatsGB = FarmTab:CreateGroupbox({
+UI.StatsGB = UI.FarmTab:CreateGroupbox({
 	Name = "Stats",
 	Column = 1,
 }, "StatsGroupbox")
@@ -61,7 +61,7 @@ UI.StartNotification = Starlight:Notification({
 }, "StartNotification")
 
 -- Toggles
-UI.FarmToggle = FarmGB:CreateToggle({
+UI.FarmToggle = UI.FarmGB:CreateToggle({
     Name = "Auto Farm",
     CurrentValue = false,
     Style = 2,
@@ -70,7 +70,7 @@ UI.FarmToggle = FarmGB:CreateToggle({
     end,
 }, "FarmToggle")
 
-UI.StatsToggle = StatsGB:CreateToggle({
+UI.StatsToggle = UI.StatsGB:CreateToggle({
     Name = "Auto Stats",
     CurrentValue = false,
     Style = 2,
@@ -80,7 +80,7 @@ UI.StatsToggle = StatsGB:CreateToggle({
 }, "StatsToggle")
 
 -- Sliders
-UI.StatSlider = StatsGB:CreateSlider({
+UI.StatSlider = UI.StatsGB:CreateSlider({
     Name = "Stats To Add",
     Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
     Range = {0,100},
@@ -91,7 +91,7 @@ UI.StatSlider = StatsGB:CreateSlider({
 }, "StatSlider")
 
 -- More Toggles
-UI.MeleeStatsToggle = StatsGB:CreateToggle({
+UI.MeleeStatsToggle = UI.StatsGB:CreateToggle({
     Name = "Melee",
     CurrentValue = false,
     Style = 2,
@@ -100,7 +100,7 @@ UI.MeleeStatsToggle = StatsGB:CreateToggle({
     end,
 }, "MeleeStatsToggle")
 
-UI.DefenseStatsToggle = StatsGB:CreateToggle({
+UI.DefenseStatsToggle = UI.StatsGB:CreateToggle({
     Name = "Defense",
     CurrentValue = false,
     Style = 2,
@@ -109,7 +109,7 @@ UI.DefenseStatsToggle = StatsGB:CreateToggle({
     end,
 }, "DefenseStatsToggle")
 
-UI.SwordStatsToggle = StatsGB:CreateToggle({
+UI.SwordStatsToggle = UI.StatsGB:CreateToggle({
     Name = "Sword",
     CurrentValue = false,
     Style = 2,
@@ -118,7 +118,7 @@ UI.SwordStatsToggle = StatsGB:CreateToggle({
     end,
 }, "SwordStatsToggle")
 
-UI.PowerStatsToggle = StatsGB:CreateToggle({
+UI.PowerStatsToggle = UI.StatsGB:CreateToggle({
     Name = "Power",
     CurrentValue = false,
     Style = 2,

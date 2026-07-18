@@ -33,7 +33,7 @@ function Stats.new()
 			if Stats.enabled then
 				for stat, value in pairs(Stats.add) do
 					if stat then
-						addStat(stat, Stats.value)
+						Stats:AddStat(stat, Stats.value)
 					end
 				end
 			end
