@@ -10,5 +10,3 @@ StatsModule.new()
 FarmModule.new()
 
 local UI = loadstring(game:HttpGet(ProjectUrl .. "UI.lua"))()
-
--- test
