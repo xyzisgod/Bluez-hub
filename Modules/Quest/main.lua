@@ -6,6 +6,10 @@ local Modules = replicatedStorage:WaitForChild("Modules")
 
 local QuestConfig = require(Modules:WaitForChild("QuestConfig"))
 
+local RemoteEvents = replicatedStorage.RemoteEvents
+
+local QuestAcceptRE = RemoteEvents:WaitForChild("QuestAccept")
+
 local lplr = game.Players.LocalPlayer
 
 local Level = lplr:WaitForChild("Data").Level
@@ -18,16 +22,24 @@ function Quest:GetQuest()
     local CurrentLevel = self:GetCurrentLevel()
 
     local bestQuest = nil
+    local bestName = nil
 
-    for _, quest in pairs(QuestConfig.RepeatableQuests) do
+    for name, quest in pairs(QuestConfig.RepeatableQuests) do
         if CurrentLevel >= quest.recommendedLevel then
             if not bestQuest or quest.recommendedLevel > bestQuest.recommendedLevel then
                 bestQuest = quest
+                bestName = name
             end
         end
     end
 
-    return bestQuest or nil
+    return bestName, bestQuest
+end
+
+function Quest:FireQuest(quest)
+    if not quest return end
+    
+    QuestAcceptRE:FireServer(quest)
 end
 
 return Quest
