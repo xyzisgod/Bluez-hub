@@ -37,8 +37,10 @@ function Quest:GetQuest()
 end
 
 function Quest:FireQuest(quest)
-    if not quest return end
-    
+    if not quest then
+        return
+    end
+
     QuestAcceptRE:FireServer(quest)
 end
 
