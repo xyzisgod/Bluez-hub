@@ -17,7 +17,9 @@ end
 function Quest:GetQuest()
     local CurrentLevel = self:GetCurrentLevel()
     
-    for i, v in pairs(QuestConfig) do
+    local Quests = QuestConfig.RepeatableQuests
+    
+    for i, v in pairs(Quests) do
         for _, quest in pairs(v) do
             if CurrentLevel >= quest.recommendedLevel then
                 return quest
