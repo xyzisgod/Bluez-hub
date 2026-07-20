@@ -20,12 +20,14 @@ function Quest:GetQuest()
     local Quests = QuestConfig.RepeatableQuests
     
     for i, v in pairs(Quests) do
-        for _, quest in pairs(v) do
-            if CurrentLevel >= quest["recommendedLevel"] then
-                return quest
-            end
+    for _, quest in pairs(v) do
+        print(quest, quest["recommendedLevel"])
+
+        if CurrentLevel >= quest["recommendedLevel"] then
+            return quest
         end
     end
+end
     
     return "Nil"
 end
