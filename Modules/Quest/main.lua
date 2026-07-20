@@ -15,7 +15,7 @@ function Quest:GetCurrentLevel()
 end
 
 function Quest:GetQuest()
-    local CurrentLevel = self:GetCurrentLevel
+    local CurrentLevel = self:GetCurrentLevel()
     
     for i, v in pairs(QuestConfig) do
         for _, quest in pairs(v) do

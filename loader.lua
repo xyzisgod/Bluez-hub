@@ -6,7 +6,14 @@ local FarmModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Farm/main
 
 local StatsModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Stats/main.lua")))()
 
-StatsModule.new()
-FarmModule.new()
+local QuestModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Quest/main.lua")))()
 
 local UI = loadstring(game:HttpGet(ProjectUrl .. "UI.lua"))()
+
+StatsModule.new()
+FarmModule.new()
+UI.new({
+    Farm  = FarmModule,
+    Stats = StatsModule,
+    Quest = QuestModule
+})

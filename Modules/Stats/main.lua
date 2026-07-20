@@ -43,4 +43,16 @@ function Stats.new()
 	return thread
 end
 
+function Stats:SetEnabled(enabled)
+	self.enabled = enabled
+end
+
+function Stats:SetAddValue(value)
+	self.value = value
+end
+
+function Stats:SetAddTable(obj, value)
+	self.add[obj] = value
+end
+
 return Stats

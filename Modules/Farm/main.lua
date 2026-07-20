@@ -33,4 +33,8 @@ function Farm.new()
     return thread
 end
 
+function Farm:SetEnabled(enabled)
+    self.enabled = enabled
+end
+
 return Farm
