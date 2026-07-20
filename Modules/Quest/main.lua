@@ -21,7 +21,7 @@ function Quest:GetQuest()
     
     for i, v in pairs(Quests) do
         for _, quest in pairs(v) do
-            if CurrentLevel >= quest.recommendedLevel then
+            if CurrentLevel >= quest["recommendedLevel"] then
                 return quest
             end
         end
