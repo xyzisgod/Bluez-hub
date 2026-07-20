@@ -21,9 +21,11 @@ function Quest:GetQuest()
     
     for i, v in pairs(Quests) do
     for _, quest in pairs(v) do
-        print(quest, quest["recommendedLevel"])
+        print(typeof(quest), quest)
          
-        if quest.recommendedLevel and CurrentLevel >= quest["recommendedLevel"] then
+        if type(quest) == "table" and quest.recommendedLevel and CurrentLevel >= quest["recommendedLevel"] then
+            print(quest, quest.recommendedLevel)
+            
             return quest
         end
     end
