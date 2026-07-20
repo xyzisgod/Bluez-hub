@@ -2,6 +2,11 @@ local ProjectUrl = "https://raw.githubusercontent.com/xyzisgod/Bluez-hub/refs/he
 
 local Commons = loadstring(game:HttpGet(ProjectUrl .. "commons.lua"))()
 
-local Farm = loadstring(game:HttpGet(ProjectUrl .. "Modules/Farm/main.lua"))()
-local Stats = loadstring(game:HttpGet(ProjectUrl .. "Modules/Stats/main.lua"))()
+local FarmModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Farm/main.lua")))()
+
+local StatsModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Stats/main.lua")))()
+
+StatsModule.new()
+FarmModule.new()
+
 local UI = loadstring(game:HttpGet(ProjectUrl .. "UI.lua"))()

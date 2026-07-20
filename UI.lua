@@ -13,10 +13,10 @@ local FarmModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Farm/main
 
 local StatsModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Stats/main.lua")))()
 
+local QuestModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Quest/main.lua")))()
+
 -- Global Settings
 getgenv().InterfaceName = "Bluez"
-local FarmThread = FarmModule.new()
-local StatsThread = StatsModule.new()
 
 -- Window
 UI.Window = Starlight:CreateWindow({
@@ -53,6 +53,11 @@ UI.StatsGB = UI.FarmTab:CreateGroupbox({
 	Name = "Stats",
 	Column = 1,
 }, "StatsGroupbox")
+
+UI.QuestGB = UI.FarmTab:CreateGroupbox({
+	Name = "Quest",
+	Column = 1,
+}, "QuestGroupbox")
 
 UI.StartNotification = Starlight:Notification({
     Title = "Bluez",
@@ -126,5 +131,14 @@ UI.PowerStatsToggle = UI.StatsGB:CreateToggle({
 		StatsModule.add["Power"] = enabled
     end,
 }, "PowerStatsToggle")
+
+UI.QuestButton = QuestGB:CreateButton({
+    Name = "Get Current Quest",
+    Icon = NebulaIcons:GetIcon('check', 'Material'),
+    Callback = function()
+        local currentQuest = QuestModule:GetQuest()
+        print(currentQuest)
+    end,
+}, "QuestButton")
 
 return UI
