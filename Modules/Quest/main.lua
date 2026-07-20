@@ -16,22 +16,18 @@ end
 
 function Quest:GetQuest()
     local CurrentLevel = self:GetCurrentLevel()
-    
-    local Quests = QuestConfig.RepeatableQuests
-    
-    for i, v in pairs(Quests) do
-    for _, quest in pairs(v) do
-        print(typeof(quest), quest)
-         
-        if type(quest) == "table" and quest.recommendedLevel and CurrentLevel >= quest["recommendedLevel"] then
-            print(quest, quest.recommendedLevel)
-            
-            return quest
+
+    local bestQuest = nil
+
+    for _, quest in pairs(QuestConfig.RepeatableQuests) do
+        if CurrentLevel >= quest.recommendedLevel then
+            if not bestQuest or quest.recommendedLevel > bestQuest.recommendedLevel then
+                bestQuest = quest
+            end
         end
     end
-end
-    
-    return "Nil"
+
+    return bestQuest or nil
 end
 
 return Quest

@@ -138,7 +138,7 @@ function UI.new(modules)
         Icon = NebulaIcons:GetIcon('check', 'Material'),
         Callback = function()
             local currentQuest = UI.QuestModule:GetQuest()
-            print(currentQuest)
+            print(currentQuest.recommendedLevel, currentQuest.title)
         end,
     }, "QuestButton")
 end
