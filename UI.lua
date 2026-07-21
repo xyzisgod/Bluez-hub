@@ -9,6 +9,10 @@ local ProjectUrl = "https://raw.githubusercontent.com/xyzisgod/Bluez-hub/refs/he
 
 local Commons = loadstring(game:HttpGet(ProjectUrl .. "commons.lua"))()
 
+local function generateIndex()
+    return Commons:randomString(10, true)
+end
+
 function UI.new(modules)
     UI.FarmModule = modules["Farm"]
     UI.StatsModule = modules["Stats"]
@@ -42,29 +46,29 @@ function UI.new(modules)
         Name = "Farm",
         Icon = NebulaIcons:GetIcon('swords', 'Lucide'),
         Columns = 2,
-    }, "FarmTab")
+    }, generateIndex())
 
     -- Groupboxes
     UI.FarmGB = UI.FarmTab:CreateGroupbox({
         Name = "Farm",
         Column = 1,
-    }, "FarmGroupBox")
+    }, generateIndex())
 
     UI.StatsGB = UI.FarmTab:CreateGroupbox({
     	Name = "Stats",
     	Column = 1,
-    }, "StatsGroupbox")
+    }, generateIndex())
 
     UI.QuestGB = UI.FarmTab:CreateGroupbox({
     	Name = "Quest",
     	Column = 1,
-    }, "QuestGroupbox")
+    }, generateIndex())
 
     UI.StartNotification = Starlight:Notification({
         Title = "Bluez",
         Icon = 0,
         Content = "Bluez started",
-    }, "StartNotification")
+    }, generateIndex())
 
     -- Toggles
     UI.FarmToggle = UI.FarmGB:CreateToggle({
@@ -83,7 +87,7 @@ function UI.new(modules)
         Callback = function(enabled)
             UI.StatsModule:SetEnabled(enabled)
         end,
-    }, "StatsToggle")
+    }, generateIndex())
 
     -- Sliders
     UI.StatSlider = UI.StatsGB:CreateSlider({
@@ -94,7 +98,7 @@ function UI.new(modules)
         Callback = function(Value)
     		 UI.StatsModule:SetAddValue(Value)
         end,
-    }, "StatSlider")
+    }, generateIndex())
 
     -- More Toggles
     UI.MeleeStatsToggle = UI.StatsGB:CreateToggle({
@@ -104,7 +108,7 @@ function UI.new(modules)
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Melee", enabled)
         end,
-    }, "MeleeStatsToggle")
+    }, generateIndex())
 
     UI.DefenseStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Defense",
@@ -113,7 +117,7 @@ function UI.new(modules)
         Callback = function(enabled)
     	UI.StatsModule:SetAddTable("Defense", enabled)
         end,
-    }, "DefenseStatsToggle")
+    }, generateIndex())
 
     UI.SwordStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Sword",
@@ -122,7 +126,7 @@ function UI.new(modules)
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Sword", enabled)
         end,
-    }, "SwordStatsToggle")
+    }, generateIndex())
 
     UI.PowerStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Power",
@@ -131,18 +135,16 @@ function UI.new(modules)
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Power", enabled)
         end,
-    }, "PowerStatsToggle")
+    }, generateIndex())
 
-    UI.QuestButton = UI.QuestGB:CreateButton({
-        Name = "Get Current Quest",
-        Icon = NebulaIcons:GetIcon('check', 'Material'),
-        Callback = function()
-            local name, currentQuest = UI.QuestModule:GetQuest()
-            print(currentQuest.recommendedLevel, name, currentQuest.title)
-        
-        UI.QuestModule:FireQuest(name)
+    UI.QuestButton = UI.QuestGB:CreateToggle({
+        Name = "Auto Get Quest",
+        CurrentValue = false,
+        Style = 2,
+        Callback = function(enabled)
+            UI.QuestModule:SetEnabled(enabled)
         end,
-    }, "QuestButton")
+    }, generateIndex())
 end
 
 return UI

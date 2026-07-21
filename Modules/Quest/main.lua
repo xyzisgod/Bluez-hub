@@ -47,4 +47,30 @@ function Quest:FireQuest(quest)
     QuestAcceptRE:FireServer(quest)
 end
 
+function Quest:SetEnabled(enabled)
+    Quest.enabled = enabled or false
+end
+
+function Quest.new()
+    Quest.enabled = false
+    
+    local thread = task.spawn(function()
+        while true do
+            task.wait(0.1)
+            
+            if Quest.enabled then
+                local name, nextQuest = Quest:GetQuest()
+                
+                if nextQuest then
+                    Quest:FireQuest(name)
+                else
+                    warn("No quest selected.")
+                end
+            end
+        end
+    end)
+    
+    return thread
+end
+
 return Quest
