@@ -57,7 +57,7 @@ function Quest.new()
     
     local thread = task.spawn(function()
         while true do
-            task.wait(0.1)
+            task.wait(1)
             
             if Quest.enabled then
                 local name, nextQuest = Quest:GetQuest()
