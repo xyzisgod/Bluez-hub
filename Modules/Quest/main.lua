@@ -48,7 +48,8 @@ function Quest:FireQuest(quest)
 end
 
 function Quest:SetEnabled(enabled)
-    Quest.enabled = enabled or false
+    print("SetEnabled", enabled)
+    Quest.enabled = enabled
 end
 
 function Quest.new()

@@ -78,7 +78,7 @@ function UI.new(modules)
         Callback = function(enabled)
     		UI.FarmModule:SetEnabled(enabled)
         end,
-    }, "FarmToggle")
+    }, generateIndex())
 
     UI.StatsToggle = UI.StatsGB:CreateToggle({
         Name = "Auto Stats",
@@ -142,8 +142,9 @@ function UI.new(modules)
         CurrentValue = false,
         Style = 2,
         Callback = function(enabled)
+            print("Quest Toggle:", enabled)
             UI.QuestModule:SetEnabled(enabled)
-        end,
+    end,
     }, generateIndex())
 end
 
