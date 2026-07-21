@@ -139,7 +139,8 @@ function UI.new(modules)
         Callback = function()
             local name, currentQuest = UI.QuestModule:GetQuest()
             print(currentQuest.recommendedLevel, name, currentQuest.title)
-            -- UI.QuestModule:FireQuest(name)
+        
+        UI.QuestModule:FireQuest(name)
         end,
     }, "QuestButton")
 end

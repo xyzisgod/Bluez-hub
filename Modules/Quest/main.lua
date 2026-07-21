@@ -6,9 +6,11 @@ local Modules = replicatedStorage:WaitForChild("Modules")
 
 local QuestConfig = require(Modules:WaitForChild("QuestConfig"))
 
-local RemoteEvents = replicatedStorage.RemoteEvents
+local RemoteEvents = replicatedStorage:WaitForChild("RemoteEvents")
 
 local QuestAcceptRE = RemoteEvents:WaitForChild("QuestAccept")
+
+local Event = game:GetService("ReplicatedStorage").RemoteEvents.QuestAccept
 
 local lplr = game.Players.LocalPlayer
 
@@ -40,7 +42,8 @@ function Quest:FireQuest(quest)
     if not quest then
         return
     end
-
+    
+    print(QuestAcceptRE, QuestAcceptRE.ClassName)
     QuestAcceptRE:FireServer(quest)
 end
 
