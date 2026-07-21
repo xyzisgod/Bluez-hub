@@ -8,8 +8,8 @@ function commons:CreateLink(url)
     return commons.ProjectURL .. url
 end
 
-function commons:randomString(lenght, includeCapitals)
-    return Random:getRandomString(lenght, includeCapitals)
+function commons:randomString(length, includeCapitals)
+    return Random:getRandomString(length, includeCapitals)
 end
 
 return commons
