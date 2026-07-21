@@ -15,11 +15,14 @@ local QuestModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Quest/ma
 print("Initializating UI")
 local UI = loadstring(game:HttpGet(ProjectUrl .. "UI.lua"))()
 
-print("Initializating Stats")
+print("Initializing Stats")
 StatsModule.new()
 
-print("Initializating Farm")
+print("Initializing Farm")
 FarmModule.new()
+
+print("Initializing Quests")
+QuestModule.new()
 
 print("Initializating UI")
 UI.new({
