@@ -19,7 +19,7 @@ print("Loading Module Target")
 local TargetModule = Commons:GetModule("Target")
 
 print("Loading Module UI")
-local UIModule = Commons:CreateLink("UI.lua")
+local UIModule = Commons:GetModule("UI")
 
 print("Loading Module Settings")
 local SettingsModule = Commons:GetModule("Settings")

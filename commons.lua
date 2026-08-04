@@ -20,9 +20,9 @@ local Modules = {
 
 function commons:GetModule(name)
     if Modules[name] then
-        return Modules[name]
+        return Modules[name]()
     end
-    
+
     return loadstring(game:HttpGet(self:CreateLink("Modules/" .. name .. "/main.lua")))()
 end
 
