@@ -12,4 +12,18 @@ function commons:randomString(length, includeCapitals)
     return Random:getRandomString(length, includeCapitals)
 end
 
+local Modules = {
+    UI = function()
+        return loadstring(game:HttpGet(self:CreateLink("UI.lua")))()
+    end)
+}
+
+function commons:GetModule(name)
+    if Modules[name] then
+        return Modules[name]
+    end
+    
+    return loadstring(game:HttpGet(self:CreateLink("Modules/" .. name .. "/main.lua")))()
+end
+
 return commons

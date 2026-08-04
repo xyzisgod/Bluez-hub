@@ -4,16 +4,22 @@ print("Loading Module Commons")
 local Commons = loadstring(game:HttpGet(ProjectUrl .. "commons.lua"))()
 
 print("Loading Module Farm")
-local FarmModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Farm/main.lua")))()
+local FarmModule = Commons:GetModule("Farm")
 
 print("Loading Module Stats")
-local StatsModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Stats/main.lua")))()
+local StatsModule = Commons:GetModule("Stats")
 
 print("Loading Module Quest")
-local QuestModule = loadstring(game:HttpGet(Commons:CreateLink("Modules/Quest/main.lua")))()
+local QuestModule = Commons:GetModule("Quest")
+
+print("Loading Module Movement")
+local MovementModule = Commons:GetModule("Movement")
+
+print("Loading Module Target")
+local TargetModule = Commons:GetModule("Target")
 
 print("Initializating UI")
-local UI = loadstring(game:HttpGet(ProjectUrl .. "UI.lua"))()
+local UI = Commons:GetModule("UI")
 
 print("Initializing Stats")
 StatsModule.new()

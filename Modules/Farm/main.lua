@@ -18,14 +18,23 @@ function Farm:RequestHit()
     end
 end
 
-function Farm.new()
+function Farm.new(modules)
+    Farm.TargetModule = modules.Target
+    Farm.MovementModule = modules.Movement
+    Farm.QuestModule = modules.Quest
     Farm.enabled = false
     local thread = task.spawn(function() 
         while true do
-            task.wait(0.1)
+            task.wait()
             
             if Farm.enabled then
-                Farm:RequestHit()
+                local quest = Farm.QuestModule:GetQuest()
+                
+                local NearestNPC = Farm.TargetModule:GetNearestNPC(quest.requirements[1].npcType)
+                
+                local NPCRoot = Farm.TargetModule:GetRoot(NearestNPC)
+                local Position = 
+                Farm.MovementModule:Teleport()
             end
         end
     end)
