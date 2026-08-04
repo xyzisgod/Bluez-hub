@@ -24,14 +24,10 @@ local UIModule = Commons:GetModule("UI")
 print("Loading Module Settings")
 local SettingsModule = Commons:GetModule("Settings")
 
-print("Loading Module Player")
-local PlayerModule = Commons:GetModule("Player")
-
-print("Initializing Player Module")
-PlayerModule.new()
-
 print("Initializing Stats Module")
-StatsModule.new()
+StatsModule.new({
+    Settings = SettingsModule
+})
 
 print("Initializing Movement Module")
 MovementModule.new()
@@ -47,8 +43,7 @@ FarmModule.new({
     Target = TargetModule,
     Movement = MovementModule,
     Quest = QuestModule,
-    Settings = SettingsModule,
-    Player = PlayerModule
+    Settings = SettingsModule
 })
 
 print("Initializing UI")
