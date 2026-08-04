@@ -12,18 +12,30 @@ function Movement:Teleport(position)
 end
 
 function Movement:Tween(position, speed)
+    if not lhrp or not lhrp.Parent then
+        return
+    end
+
     local distance = (lhrp.Position - position).Magnitude
-    local time = distance / speed
+    local duration = distance / speed
+    local startTime = tick()
 
-    local tween = TweenService:Create(
-        lhrp,
-        TweenInfo.new(time, Enum.EasingStyle.Linear),
-        {
-            CFrame = CFrame.new(position)
-        }
-    )
+    while tick() - startTime < duration do
+        if not lhrp or not lhrp.Parent then
+            break
+        end
 
-    tween:Play()
+        local alpha = (tick() - startTime) / duration
+        local newPosition = lhrp.Position:Lerp(position, alpha)
+
+        lhrp.CFrame = CFrame.new(newPosition)
+
+        task.wait()
+    end
+
+    if lhrp and lhrp.Parent then
+        lhrp.CFrame = CFrame.new(position)
+    end
 end
 
 function Movement:Update()

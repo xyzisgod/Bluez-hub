@@ -50,6 +50,10 @@ function Target:GetHumanoid(npc)
 end
 
 function Target:GetRoot(npc)
+    if not npc then
+        return nil
+    end
+
     return npc:FindFirstChild("HumanoidRootPart")
 end
 

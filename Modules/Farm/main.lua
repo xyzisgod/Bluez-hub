@@ -36,8 +36,19 @@ function Farm.new(modules)
                 end
 
                 local NearestNPC = Farm.TargetModule:GetNearestNPC(quest.requirements[1].npcType)
-                
+
+                if not NearestNPC then
+                    task.wait(0.2)
+                    continue
+                end
+
                 local NPCRoot = Farm.TargetModule:GetRoot(NearestNPC)
+
+                if not NPCRoot then
+                    task.wait(0.2)
+                    continue
+                end
+
                 local offset = Farm.SettingsModule:Get("Farm", "offset")
                 local speed = Farm.SettingsModule:Get("Farm", "speed")
                 Farm.MovementModule:Tween(NPCRoot.Position + offset, speed) -- Uses SPS(Studs Per Second) to move the player
