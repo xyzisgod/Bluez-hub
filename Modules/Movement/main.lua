@@ -12,17 +12,16 @@ function Movement:Teleport(position)
 end
 
 function Movement:Tween(position, speed)
-    local distance = (lhrp.Position - position.Position).Magnitude
+    local distance = (lhrp.Position - position).Magnitude
     local time = distance / speed
 
-    local tweenInfo = TweenInfo.new(
-        time,
-        Enum.EasingStyle.Linear
+    local tween = TweenService:Create(
+        lhrp,
+        TweenInfo.new(time, Enum.EasingStyle.Linear),
+        {
+            CFrame = CFrame.new(position)
+        }
     )
-
-    local tween = TweenService:Create(lhrp, tweenInfo, {
-        CFrame = position
-    })
 
     tween:Play()
 end
