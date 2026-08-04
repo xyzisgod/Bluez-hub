@@ -63,7 +63,7 @@ function UI.new(modules)
 
     UI.StatsGB = UI.StatsTab:CreateGroupbox({
     	Name = "Stats",
-    	Column = 2,
+    	Column = 1,
     }, generateIndex())
 
     UI.QuestGB = UI.FarmTab:CreateGroupbox({
@@ -85,7 +85,7 @@ function UI.new(modules)
     -- Toggles
     UI.FarmToggle = UI.FarmGB:CreateToggle({
         Name = "Auto Farm",
-        CurrentValue = false,
+        CurrentValue = UI.SettingsModule:Get("Farm", "enabled"),
         Style = 2,
         Callback = function(enabled)
     		UI.FarmModule:SetEnabled(enabled)
@@ -94,7 +94,7 @@ function UI.new(modules)
 
     UI.StatsToggle = UI.StatsGB:CreateToggle({
         Name = "Auto Stats",
-        CurrentValue = false,
+        CurrentValue = UI.SettingsModule:Get("Stats", "enabled"),
         Style = 2,
         Callback = function(enabled)
             UI.StatsModule:SetEnabled(enabled)
@@ -106,6 +106,7 @@ function UI.new(modules)
         Name = "Stats To Add",
         Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
         Range = {0,100},
+        CurrentValue = UI.SettingsModule:Get("Stats", "value"),
         Increment = 1,
         Callback = function(Value)
     		 UI.StatsModule:SetAddValue(Value)
@@ -115,7 +116,7 @@ function UI.new(modules)
     -- More Toggles
     UI.MeleeStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Melee",
-        CurrentValue = false,
+        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Melee"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Melee", enabled)
@@ -124,7 +125,7 @@ function UI.new(modules)
 
     UI.DefenseStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Defense",
-        CurrentValue = false,
+        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Defense"),
         Style = 2,
         Callback = function(enabled)
     	UI.StatsModule:SetAddTable("Defense", enabled)
@@ -133,7 +134,7 @@ function UI.new(modules)
 
     UI.SwordStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Sword",
-        CurrentValue = false,
+        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Sword"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Sword", enabled)
@@ -142,7 +143,7 @@ function UI.new(modules)
 
     UI.PowerStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Power",
-        CurrentValue = false,
+        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Power"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Power", enabled)
@@ -151,15 +152,14 @@ function UI.new(modules)
 
     UI.QuestButton = UI.QuestGB:CreateToggle({
         Name = "Auto Get Quest",
-        CurrentValue = false,
+        CurrentValue = UI.SettingsModule:Get("Quest", "enabled"),
         Style = 2,
         Callback = function(enabled)
-            print("Quest Toggle:", enabled)
             UI.QuestModule:SetEnabled(enabled)
     end,
     }, generateIndex())
 
-    UI.VecXSlider = UI.FarmGB:CreateSlider({
+    UI.VecXSlider = UI.PosOffGB:CreateSlider({
         Name = "X",
         Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
         Range = {0,50},

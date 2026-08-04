@@ -59,13 +59,22 @@ function Settings:Load()
     print(HttpService:JSONEncode(self.Configuration))
 end
 
-function Settings:Get(category, key)
-    if not category or not key then
-        warn("No category or key to get")
-        return
+function Settings:Get(...)
+    local current = self.Configuration
+
+    for _, key in ipairs({...}) do
+        if type(current) ~= "table" then
+            return nil
+        end
+
+        current = current[key]
+
+        if current == nil then
+            return nil
+        end
     end
-    
-    return self.Configuration[category][key] 
+
+    return current
 end
 
 return Settings

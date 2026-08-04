@@ -16,7 +16,13 @@ function Stats:AddStat(stat, value)
 	end
 end
 
-function Stats.new()
+function Stats.new(modules)
+	if not modules then
+		warn("Stats module requires other modules to function properly.")
+		return
+	end
+	Stats.SettingsModule = modules.Settings
+
     Stats.enabled = false
     Stats.value = 1
     Stats.add = { 
