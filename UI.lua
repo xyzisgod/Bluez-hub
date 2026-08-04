@@ -14,12 +14,13 @@ local function generateIndex()
 end
 
 function UI.new(modules)
-    UI.FarmModule = modules["Farm"]
-    UI.StatsModule = modules["Stats"]
-    UI.QuestModule = modules["Quest"]
-    
-    -- Initialize UI (hard work btw) --
-    
+    UI.FarmModule = modules.Farm
+    UI.StatsModule = modules.Stats
+    UI.QuestModule = modules.Quest
+    UI.SettingsModule = modules.Settings
+
+    -- Initialize UI (Written by hand btw) --
+
     -- Global Settings
     getgenv().InterfaceName = "Bluez"
 
@@ -27,7 +28,7 @@ function UI.new(modules)
     UI.Window = Starlight:CreateWindow({
         Name = "Bluez",
         Subtitle = "v1.0",
-        Icon = 123456789,
+        Icon = 72847354965324,
 
         LoadingSettings = {
             Title = "Bluez",
@@ -48,20 +49,31 @@ function UI.new(modules)
         Columns = 2,
     }, generateIndex())
 
+    UI.StatsTab = UI.FarmSection:CreateTab({
+        Name = "Stats",
+        Icon = NebulaIcons:GetIcon('swords', 'Lucide'),
+        Columns = 2,
+    }, generateIndex())
+
     -- Groupboxes
     UI.FarmGB = UI.FarmTab:CreateGroupbox({
         Name = "Farm",
         Column = 1,
     }, generateIndex())
 
-    UI.StatsGB = UI.FarmTab:CreateGroupbox({
+    UI.StatsGB = UI.StatsTab:CreateGroupbox({
     	Name = "Stats",
-    	Column = 1,
+    	Column = 2,
     }, generateIndex())
 
     UI.QuestGB = UI.FarmTab:CreateGroupbox({
     	Name = "Quest",
     	Column = 1,
+    }, generateIndex())
+
+    UI.PosOffGB = UI.FarmTab:CreateGroupbox({
+    	Name = "Position Offset",
+    	Column = 2,
     }, generateIndex())
 
     UI.StartNotification = Starlight:Notification({
@@ -145,6 +157,39 @@ function UI.new(modules)
             print("Quest Toggle:", enabled)
             UI.QuestModule:SetEnabled(enabled)
     end,
+    }, generateIndex())
+
+    UI.VecXSlider = UI.FarmGB:CreateSlider({
+        Name = "X",
+        Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
+        Range = {0,50},
+        Increment = 1,
+        Callback = function(Value)
+            local vector = UI.SettingsModule:Get("Farm", "offset")
+            UI.FarmModule:SetOffset(Vector3.new(Value, vector.Y, vector.Z))
+        end,
+    }, generateIndex())
+
+    UI.VecYSlider = UI.PosOffGB:CreateSlider({
+        Name = "Y",
+        Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
+        Range = {0,50},
+        Increment = 1,
+        Callback = function(Value)
+            local vector = UI.SettingsModule:Get("Farm", "offset")
+            UI.FarmModule:SetOffset(Vector3.new(vector.X, Value, vector.Z))
+        end,
+    }, generateIndex())
+
+    UI.VecZSlider = UI.PosOffGB:CreateSlider({
+        Name = "Z",
+        Icon = NebulaIcons:GetIcon('chart-no-axes-column-increasing', 'Lucide'),
+        Range = {0,50},
+        Increment = 1,
+        Callback = function(Value)
+            local vector = UI.SettingsModule:Get("Farm", "offset")
+            UI.FarmModule:SetOffset(Vector3.new(vector.X, vector.Y, Value))
+        end,
     }, generateIndex())
 end
 

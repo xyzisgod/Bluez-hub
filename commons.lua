@@ -14,8 +14,8 @@ end
 
 local Modules = {
     UI = function()
-        return loadstring(game:HttpGet(self:CreateLink("UI.lua")))()
-    end)
+        return loadstring(game:HttpGet(commons:CreateLink("UI.lua")))()
+    end
 }
 
 function commons:GetModule(name)

@@ -4,7 +4,8 @@ local HttpService = game:GetService("HttpService")
 Settings.Configuration = {
     ["Farm"] = {
         ["enabled"] = false,
-        ["offset"] = Vector3.new()
+        ["offset"] = Vector3.new(0, 0, 0),
+        ["speed"] = 50
     },
     ["Stats"] = {
         ["enabled"] = false,

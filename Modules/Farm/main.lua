@@ -22,6 +22,7 @@ function Farm.new(modules)
     Farm.TargetModule = modules.Target
     Farm.MovementModule = modules.Movement
     Farm.QuestModule = modules.Quest
+    Farm.SettingsModule = modules.Settings
     Farm.enabled = false
     local thread = task.spawn(function() 
         while true do
@@ -33,8 +34,10 @@ function Farm.new(modules)
                 local NearestNPC = Farm.TargetModule:GetNearestNPC(quest.requirements[1].npcType)
                 
                 local NPCRoot = Farm.TargetModule:GetRoot(NearestNPC)
-                local Position = 
-                Farm.MovementModule:Teleport()
+                local offset = Farm.SettingsModule:Get("Farm", "offset")
+                local speed = Farm.SettingsModule:Get("Farm", "speed")
+                Farm.MovementModule:Tween(NPCRoot.Position + offset, speed) -- Uses SPS(Studs Per Second) to move the player
+                Farm:RequestHit()
             end
         end
     end)
@@ -44,6 +47,10 @@ end
 
 function Farm:SetEnabled(enabled)
     self.enabled = enabled
+end
+
+function Farm:SetOffset(offset)
+    self.SettingsModule:Save("Farm", "offset", offset)
 end
 
 return Farm
