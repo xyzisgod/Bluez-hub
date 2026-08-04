@@ -29,8 +29,12 @@ function Farm.new(modules)
             task.wait()
             
             if Farm.enabled then
-                local quest = Farm.QuestModule:GetQuest()
-                
+                local _, quest = Farm.QuestModule:GetQuest()
+
+                if not quest then
+                    continue
+                end
+
                 local NearestNPC = Farm.TargetModule:GetNearestNPC(quest.requirements[1].npcType)
                 
                 local NPCRoot = Farm.TargetModule:GetRoot(NearestNPC)
