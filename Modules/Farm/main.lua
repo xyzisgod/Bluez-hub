@@ -19,12 +19,17 @@ function Farm:RequestHit()
 end
 
 function Farm.new(modules)
+    if not modules then
+        warn("Farm module requires other modules to function properly.")
+        return
+    end
+
     Farm.TargetModule = modules.Target
     Farm.MovementModule = modules.Movement
     Farm.QuestModule = modules.Quest
     Farm.SettingsModule = modules.Settings
     Farm.enabled = false
-    local thread = task.spawn(function() 
+    local thread = task.spawn(function()
         while true do
             task.wait()
             
@@ -38,14 +43,14 @@ function Farm.new(modules)
                 local NearestNPC = Farm.TargetModule:GetNearestNPC(quest.requirements[1].npcType)
 
                 if not NearestNPC then
-                    task.wait(0.2)
+                    task.wait(0.1)
                     continue
                 end
 
                 local NPCRoot = Farm.TargetModule:GetRoot(NearestNPC)
 
                 if not NPCRoot then
-                    task.wait(0.2)
+                    task.wait(0.1)
                     continue
                 end
 
@@ -62,10 +67,11 @@ end
 
 function Farm:SetEnabled(enabled)
     self.enabled = enabled
+    self.SettingsModule:Save(enabled, "Farm", "enabled")
 end
 
 function Farm:SetOffset(offset)
-    self.SettingsModule:Save("Farm", "offset", offset)
+    self.SettingsModule:Save(offset, "Farm", "offset")
 end
 
 return Farm

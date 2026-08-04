@@ -10,16 +10,21 @@ local ProjectUrl = "https://raw.githubusercontent.com/xyzisgod/Bluez-hub/refs/he
 local Commons = loadstring(game:HttpGet(ProjectUrl .. "commons.lua"))()
 
 local function generateIndex()
-    return Commons:randomString(10, true)
+    return Commons:randomString(10, true) -- First arg: Length of the string, Second arg: Whether to include capitals or not. This function is used to generate a unique index for each UI element, preventing conflicts and ensuring proper functionality.
 end
 
 function UI.new(modules)
+    if not modules then
+        warn("UI module requires other modules to function properly.")
+        return
+    end
+
     UI.FarmModule = modules.Farm
     UI.StatsModule = modules.Stats
     UI.QuestModule = modules.Quest
     UI.SettingsModule = modules.Settings
 
-    -- Initialize UI (Written by hand btw) --
+    -- Initialize UI --
 
     -- Global Settings
     getgenv().InterfaceName = "Bluez"

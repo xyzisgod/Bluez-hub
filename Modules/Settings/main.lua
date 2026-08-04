@@ -41,14 +41,23 @@ function Settings:Read()
     return self.Configuration
 end
 
-function Settings:Save(category, key, value)
-    if not category or not key or value == nil then
-        warn("No category/key or value to save")
-        return
+function Settings:Save(value, ...)
+    local path = {...}
+    local current = self.Configuration
+
+    for i = 1, #path - 1 do
+        local key = path[i]
+
+        if type(current[key]) ~= "table" then
+            warn(("Invalid path: %s"):format(key))
+            return
+        end
+
+        current = current[key]
     end
-    
-    self.Configuration[category][key] = value
-    
+
+    current[path[#path]] = value
+
     self:Write()
 end
 

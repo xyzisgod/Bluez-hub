@@ -9,8 +9,7 @@ local QuestConfig = require(Modules:WaitForChild("QuestConfig"))
 local RemoteEvents = replicatedStorage:WaitForChild("RemoteEvents")
 
 local QuestAcceptRE = RemoteEvents:WaitForChild("QuestAccept")
-
-local Event = game:GetService("ReplicatedStorage").RemoteEvents.QuestAccept
+local QuestAbandonRE = RemoteEvents:WaitForChild("QuestAbandon")
 
 local lplr = game.Players.LocalPlayer
 
@@ -43,17 +42,33 @@ function Quest:FireQuest(quest)
         return
     end
     
-    print(QuestAcceptRE, QuestAcceptRE.ClassName)
     QuestAcceptRE:FireServer(quest)
+end
+
+function Quest:AbandonQuest()
+    if not QuestAbandonRE then
+        warn("QuestAbandonRE is not available.")
+        return
+    end
+
+    QuestAbandonRE:FireServer("repeatable")
 end
 
 function Quest:SetEnabled(enabled)
     print("SetEnabled", enabled)
     Quest.enabled = enabled
+
+    self.SettingsModule:Save(enabled, "Quest", "enabled")
 end
 
-function Quest.new()
+function Quest.new(modules)
+    if not modules then
+        warn("Quest module requires other modules to function properly.")
+        return
+    end
+
     Quest.enabled = false
+    Quest.SettingsModule = modules.Settings
     
     local thread = task.spawn(function()
         while true do

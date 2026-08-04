@@ -51,14 +51,17 @@ end
 
 function Stats:SetEnabled(enabled)
 	self.enabled = enabled
+	self.SettingsModule:Save(enabled, "Stats", "enabled")
 end
 
 function Stats:SetAddValue(value)
 	self.value = value
+	self.SettingsModule:Save(value, "Stats", "value")
 end
 
 function Stats:SetAddTable(obj, value)
 	self.add[obj] = value
+	self.SettingsModule:Save(value, "Stats", "add", obj)
 end
 
 return Stats
