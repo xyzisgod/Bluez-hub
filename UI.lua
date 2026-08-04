@@ -116,7 +116,7 @@ function UI.new(modules)
     -- More Toggles
     UI.MeleeStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Melee",
-        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Melee"),
+        CurrentValue = UI.SettingsModule:Get("Stats", "add", "Melee"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Melee", enabled)
@@ -125,7 +125,7 @@ function UI.new(modules)
 
     UI.DefenseStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Defense",
-        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Defense"),
+        CurrentValue = UI.SettingsModule:Get("Stats", "add", "Defense"),
         Style = 2,
         Callback = function(enabled)
     	UI.StatsModule:SetAddTable("Defense", enabled)
@@ -134,7 +134,7 @@ function UI.new(modules)
 
     UI.SwordStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Sword",
-        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Sword"),
+        CurrentValue = UI.SettingsModule:Get("Stats", "add", "Sword"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Sword", enabled)
@@ -143,7 +143,7 @@ function UI.new(modules)
 
     UI.PowerStatsToggle = UI.StatsGB:CreateToggle({
         Name = "Power",
-        CurrentValue = UI.SetttingsModule:Get("Stats", "add", "Power"),
+        CurrentValue = UI.SettingsModule:Get("Stats", "add", "Power"),
         Style = 2,
         Callback = function(enabled)
     		UI.StatsModule:SetAddTable("Power", enabled)
