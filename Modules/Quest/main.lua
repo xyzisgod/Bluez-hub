@@ -58,7 +58,7 @@ function Quest:SetEnabled(enabled)
     print("SetEnabled", enabled)
     Quest.enabled = enabled
 
-    self.SettingsModule:Save(enabled, "Quest", "enabled")
+    Quest.SettingsModule:Save(enabled, "Quest", "enabled")
 end
 
 function Quest.new(modules)

@@ -36,7 +36,9 @@ print("Initializing Target Module")
 TargetModule.new()
 
 print("Initializing Quests Module")
-QuestModule.new()
+QuestModule.new({
+    Settings = SettingsModule
+})
 QuestModule:AbandonQuest()
 
 print("Initializing Farm Module")
