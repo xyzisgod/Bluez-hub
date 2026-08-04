@@ -14,7 +14,14 @@ local function getCharacters(npcType)
         local hrp = npc:FindFirstChild("HumanoidRootPart")
         local humanoid = npc:FindFirstChildOfClass("Humanoid")
 
-        if npc.Name == npcType and hrp and humanoid and humanoid.Health > 0 then
+        local suffix = npc.Name:sub(#npcType + 1)
+
+        if npc.Name:sub(1, #npcType) == npcType
+            and (suffix == "" or tonumber(suffix))
+            and hrp
+            and humanoid
+            and humanoid.Health > 0 then
+
             table.insert(characters, npc)
         end
     end
